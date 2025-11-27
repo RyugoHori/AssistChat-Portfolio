@@ -1,0 +1,25 @@
+[project]
+name = "rag-core"
+version = "1.0.0"
+description = "Core RAG library for kairag-portfolio"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "faiss-cpu>=1.7.4",
+    "sentence-transformers>=2.2.2",
+    "rank-bm25>=0.2.2",
+    "mecab-python3>=1.0.8",
+    "unidic-lite>=1.0.8",
+    "tqdm>=4.66.0",
+    "torch>=2.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rag_core*"]
+

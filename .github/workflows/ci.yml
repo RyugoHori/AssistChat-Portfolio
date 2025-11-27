@@ -1,0 +1,110 @@
+# CI　良さげなテンプレ引用　
+# プッシュ時に自動でLintとビルドチェックを実行
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ===========================================
+  # バックエンド（Python）のチェック
+  # ===========================================
+  backend:
+    name: Backend Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      # 依存関係インストール
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff mypy pytest
+          pip install -e ./packages/rag-core
+          pip install -r services/rag-api/requirements.txt
+
+      # Ruffでコードスタイルチェック
+      # PEP8準拠 + よくあるバグパターンの検出
+      - name: Lint with Ruff
+        run: |
+          ruff check packages/rag-core services/rag-api/src tools/evaluation --output-format=github
+
+      # MyPyで静的型チェック
+      # バグの温床になりやすい型不整合を検出
+      - name: Type Check with MyPy
+        run: |
+          # ignore-missing-imports はライブラリの型定義がない場合にエラーにしない設定
+          mypy packages/rag-core/rag_core services/rag-api/src --ignore-missing-imports
+
+      # Pytestでユニットテスト
+      # 検索ロジックなどの単体テストを実行
+      - name: Run Unit Tests
+        run: |
+          # testsディレクトリはpackages/rag-core/testsにある想定
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/packages/rag-core
+          pytest packages/rag-core/tests
+
+      # 評価スクリプトの動作確認（シミュレーションモード）
+      - name: Run evaluation script
+        run: |
+          cd tools/evaluation
+          python evaluate.py --mode all --simulate
+
+  # ===========================================
+  # フロントエンド（Next.js）のチェック
+  # ===========================================
+  frontend:
+    name: Frontend Check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./apps/assist-chat
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: ./apps/assist-chat/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ESLintでコードチェック
+      - name: Lint
+        run: npm run lint
+
+      # ビルドチェック（型エラーの検出）
+      # これが通ればデプロイしても大丈夫
+      - name: Build
+        run: npm run build
+
+  # ===========================================
+  # Docker Composeのビルドチェック
+  # ===========================================
+  docker:
+    name: Docker Build Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      # Dockerイメージがビルドできるか確認
+      # 実際に起動はしない（時間かかる）
+      - name: Build Docker images
+        run: |
+          docker compose build --no-cache

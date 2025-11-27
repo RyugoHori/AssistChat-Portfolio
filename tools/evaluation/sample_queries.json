@@ -1,0 +1,186 @@
+{
+  "description": "評価用テストクエリセット（30件）",
+  "note": "各クエリに対して、正解となるドキュメントID（relevant_docs）を定義。doc_idはデモデータのIDに対応。",
+  "queries": [
+    {
+      "id": "Q001",
+      "query": "コンベアが停止して動かない",
+      "relevant_docs": ["doc_000042", "doc_000156", "doc_000089"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q002",
+      "query": "モーター過負荷エラー",
+      "relevant_docs": ["doc_000078", "doc_000234"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q003",
+      "query": "インバータの異常停止",
+      "relevant_docs": ["doc_000091", "doc_000023", "doc_000167"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q004",
+      "query": "PLCとの通信エラー",
+      "relevant_docs": ["doc_000112", "doc_000298"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q005",
+      "query": "油圧プレスの圧力が上がらない",
+      "relevant_docs": ["doc_000045", "doc_000189"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q006",
+      "query": "温度センサーの値が異常",
+      "relevant_docs": ["doc_000067", "doc_000145", "doc_000201"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q007",
+      "query": "ロボットアームが原点復帰しない",
+      "relevant_docs": ["doc_000134", "doc_000056"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q008",
+      "query": "サーボアンプのアラーム",
+      "relevant_docs": ["doc_000098", "doc_000312"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q009",
+      "query": "エアシリンダーの動作が遅い",
+      "relevant_docs": ["doc_000123", "doc_000067"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q010",
+      "query": "タッチパネルが反応しない",
+      "relevant_docs": ["doc_000145", "doc_000278"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q011",
+      "query": "NC旋盤の主軸が回転しない",
+      "relevant_docs": ["doc_000167", "doc_000034"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q012",
+      "query": "冷却水の流量低下",
+      "relevant_docs": ["doc_000178", "doc_000189"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q013",
+      "query": "光電センサーが検知しない",
+      "relevant_docs": ["doc_000189", "doc_000012", "doc_000256"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q014",
+      "query": "AGVが停止位置でずれる",
+      "relevant_docs": ["doc_000201", "doc_000089"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q015",
+      "query": "溶接ロボットのアーク不安定",
+      "relevant_docs": ["doc_000212", "doc_000345"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q016",
+      "query": "コンプレッサーの圧力変動",
+      "relevant_docs": ["doc_000223", "doc_000056", "doc_000123"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q017",
+      "query": "マシニングセンタの工具交換エラー",
+      "relevant_docs": ["doc_000234", "doc_000078"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q018",
+      "query": "近接スイッチが誤検知する",
+      "relevant_docs": ["doc_000245", "doc_000167", "doc_000289"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q019",
+      "query": "ベルトコンベアの蛇行",
+      "relevant_docs": ["doc_000256", "doc_000123"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q020",
+      "query": "制御盤内の温度上昇",
+      "relevant_docs": ["doc_000267", "doc_000234"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q021",
+      "query": "ナットランナーのトルク異常",
+      "relevant_docs": ["doc_000278", "doc_000145"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q022",
+      "query": "イーサネット通信が断続的に切れる",
+      "relevant_docs": ["doc_000289", "doc_000312"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q023",
+      "query": "研削盤の振動が大きい",
+      "relevant_docs": ["doc_000301", "doc_000167"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q024",
+      "query": "画像処理カメラのピントが合わない",
+      "relevant_docs": ["doc_000312", "doc_000189"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q025",
+      "query": "ボイラーの燃焼不良",
+      "relevant_docs": ["doc_000323", "doc_000178"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q026",
+      "query": "圧入機の荷重が規定値に達しない",
+      "relevant_docs": ["doc_000334", "doc_000256"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q027",
+      "query": "ステッピングモーターの脱調",
+      "relevant_docs": ["doc_000345", "doc_000098"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q028",
+      "query": "リミットスイッチが動作しない",
+      "relevant_docs": ["doc_000356", "doc_000145", "doc_000245"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q029",
+      "query": "塗布装置の吐出量ばらつき",
+      "relevant_docs": ["doc_000367", "doc_000212"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q030",
+      "query": "集塵機のフィルター詰まり警報",
+      "relevant_docs": ["doc_000378", "doc_000278"],
+      "category": "ユーティリティ"
+    }
+  ]
+}
