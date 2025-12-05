@@ -9,6 +9,8 @@
 
 ![AssistChat Demo](docs/images/demo-screenshot.png)
 
+
+![Demo](docs/images/PC版デモ.gif)
 ---
 
 ## ✨ 特徴

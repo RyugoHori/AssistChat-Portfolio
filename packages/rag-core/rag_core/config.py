@@ -22,7 +22,7 @@ DEFAULT_CONFIG = {
         "normalize_embeddings": True
     },
     "indexing": {
-        "index_type": "Flat"  # 500件程度ならFlatで十分
+        "index_type": "Flat"  # 1万件件程度ならFlatで十分
     },
     "retrieval": {
         "enable_hybrid_search": True,

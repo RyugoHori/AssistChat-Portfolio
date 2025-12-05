@@ -100,15 +100,9 @@ export default function HomePage() {
                       {filterMetadata && (
                         <FilterPanel
                           filters={filters}
-                          onChange={(newFilters) => {
-                            updateFilters(newFilters);
-                            setShowFilterSheet(false); // フィルター適用後は閉じる
-                          }}
+                          onChange={updateFilters}
                           metadata={filterMetadata}
-                          onReset={() => {
-                            clearSearch();
-                            setShowFilterSheet(false);
-                          }}
+                          onReset={clearSearch}
                         />
                       )}
                     </div>
