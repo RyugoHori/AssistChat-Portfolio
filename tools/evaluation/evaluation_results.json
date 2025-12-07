@@ -1,0 +1,34 @@
+[
+  {
+    "method": "dense",
+    "mrr": 0.503,
+    "recall_at_1": 0.467,
+    "recall_at_3": 0.533,
+    "recall_at_5": 0.533,
+    "precision_at_5": 0.107
+  },
+  {
+    "method": "sparse",
+    "mrr": 0.328,
+    "recall_at_1": 0.167,
+    "recall_at_3": 0.533,
+    "recall_at_5": 0.533,
+    "precision_at_5": 0.107
+  },
+  {
+    "method": "hybrid",
+    "mrr": 0.626,
+    "recall_at_1": 0.5,
+    "recall_at_3": 0.733,
+    "recall_at_5": 0.867,
+    "precision_at_5": 0.18
+  },
+  {
+    "method": "rerank",
+    "mrr": 0.761,
+    "recall_at_1": 0.733,
+    "recall_at_3": 0.8,
+    "recall_at_5": 0.8,
+    "precision_at_5": 0.16
+  }
+]

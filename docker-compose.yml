@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  rag-api:
+    build:
+      context: .
+      dockerfile: services/rag-api/Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./data:/app/data
+      - ./tools:/app/tools
+      - ./packages:/packages
+      - ./services/rag-api/src:/app/src
+    restart: always
+
+  assist-chat:
+    build:
+      context: ./apps/assist-chat
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8001
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/assist-chat:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8001
+      - WATCHPACK_POLLING=true
+    command: npm run dev
+    depends_on:
+      - rag-api
+    restart: always
