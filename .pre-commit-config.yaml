@@ -1,0 +1,60 @@
+# Pre-commit フック設定
+#
+# インストール:
+#   pip install pre-commit
+#   pre-commit install
+#
+# 手動実行:
+#   pre-commit run --all-files
+#
+# 設計方針:
+#   - 高速に完了するチェックのみ（テスト / ビルドは CI に回す）
+#   - フォーマッタは自動修正、linter は警告のみ
+#   - コミットメッセージの規約 (conventional commits) は敢えて強制しない
+#     （個人運用でフリクションを上げすぎない）
+
+default_language_version:
+  python: python3.11
+
+repos:
+  # -------- 共通 --------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(.*\.md|data/.*|.*\.bm25|.*\.faiss)$
+      - id: end-of-file-fixer
+        exclude: ^(data/.*|.*\.bm25|.*\.faiss)$
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-toml
+      - id: check-json
+        exclude: ^apps/assist-chat/tsconfig.json$  # JSON with comments
+      - id: check-added-large-files
+        args: [--maxkb=2048]
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # -------- Python: Ruff (lint + format) --------
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+        files: ^(packages/rag-core|services/rag-api/src|tools)/.*\.py$
+      - id: ruff-format
+        files: ^(packages/rag-core|services/rag-api/src|tools)/.*\.py$
+
+  # -------- シェルスクリプト --------
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+
+  # -------- Secrets スキャン --------
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks

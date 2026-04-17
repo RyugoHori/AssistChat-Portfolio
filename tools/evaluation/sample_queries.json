@@ -1,0 +1,606 @@
+{
+  "description": "評価用テストクエリセット（100件）- ポートフォリオ用",
+  "note": "各クエリに対して、正解となるドキュメントID（relevant_docs）を定義。doc_idはデモデータのIDに対応。製造業の典型的な故障パターンを網羅。",
+  "queries": [
+    {
+      "id": "Q001",
+      "query": "コンベアが停止して動かない",
+      "relevant_docs": ["doc_000042", "doc_000156", "doc_000089"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q002",
+      "query": "モーター過負荷エラー",
+      "relevant_docs": ["doc_000078", "doc_000234"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q003",
+      "query": "インバータの異常停止",
+      "relevant_docs": ["doc_000091", "doc_000023", "doc_000167"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q004",
+      "query": "PLCとの通信エラー",
+      "relevant_docs": ["doc_000112", "doc_000298"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q005",
+      "query": "油圧プレスの圧力が上がらない",
+      "relevant_docs": ["doc_000045", "doc_000189"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q006",
+      "query": "温度センサーの値が異常",
+      "relevant_docs": ["doc_000067", "doc_000145", "doc_000201"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q007",
+      "query": "ロボットアームが原点復帰しない",
+      "relevant_docs": ["doc_000134", "doc_000056"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q008",
+      "query": "サーボアンプのアラーム",
+      "relevant_docs": ["doc_000098", "doc_000312"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q009",
+      "query": "エアシリンダーの動作が遅い",
+      "relevant_docs": ["doc_000123", "doc_000067"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q010",
+      "query": "タッチパネルが反応しない",
+      "relevant_docs": ["doc_000145", "doc_000278"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q011",
+      "query": "NC旋盤の主軸が回転しない",
+      "relevant_docs": ["doc_000167", "doc_000034"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q012",
+      "query": "冷却水の流量低下",
+      "relevant_docs": ["doc_000178", "doc_000189"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q013",
+      "query": "光電センサーが検知しない",
+      "relevant_docs": ["doc_000189", "doc_000012", "doc_000256"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q014",
+      "query": "AGVが停止位置でずれる",
+      "relevant_docs": ["doc_000201", "doc_000089"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q015",
+      "query": "溶接ロボットのアーク不安定",
+      "relevant_docs": ["doc_000212", "doc_000345"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q016",
+      "query": "コンプレッサーの圧力変動",
+      "relevant_docs": ["doc_000223", "doc_000056", "doc_000123"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q017",
+      "query": "マシニングセンタの工具交換エラー",
+      "relevant_docs": ["doc_000234", "doc_000078"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q018",
+      "query": "近接スイッチが誤検知する",
+      "relevant_docs": ["doc_000245", "doc_000167", "doc_000289"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q019",
+      "query": "ベルトコンベアの蛇行",
+      "relevant_docs": ["doc_000256", "doc_000123"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q020",
+      "query": "制御盤内の温度上昇",
+      "relevant_docs": ["doc_000267", "doc_000234"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q021",
+      "query": "ナットランナーのトルク異常",
+      "relevant_docs": ["doc_000278", "doc_000145"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q022",
+      "query": "イーサネット通信が断続的に切れる",
+      "relevant_docs": ["doc_000289", "doc_000312"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q023",
+      "query": "研削盤の振動が大きい",
+      "relevant_docs": ["doc_000301", "doc_000167"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q024",
+      "query": "画像処理カメラのピントが合わない",
+      "relevant_docs": ["doc_000312", "doc_000189"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q025",
+      "query": "ボイラーの燃焼不良",
+      "relevant_docs": ["doc_000323", "doc_000178"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q026",
+      "query": "圧入機の荷重が規定値に達しない",
+      "relevant_docs": ["doc_000334", "doc_000256"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q027",
+      "query": "ステッピングモーターの脱調",
+      "relevant_docs": ["doc_000345", "doc_000098"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q028",
+      "query": "リミットスイッチが動作しない",
+      "relevant_docs": ["doc_000356", "doc_000145", "doc_000245"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q029",
+      "query": "塗布装置の吐出量ばらつき",
+      "relevant_docs": ["doc_000367", "doc_000212"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q030",
+      "query": "集塵機のフィルター詰まり警報",
+      "relevant_docs": ["doc_000378", "doc_000278"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q031",
+      "query": "プレス機のダイクッションが作動しない",
+      "relevant_docs": ["doc_000389", "doc_000045"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q032",
+      "query": "ブレーカーが頻繁にトリップする",
+      "relevant_docs": ["doc_000401", "doc_000267"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q033",
+      "query": "真空ポンプの吸引力低下",
+      "relevant_docs": ["doc_000412", "doc_000134"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q034",
+      "query": "エンコーダのカウントずれ",
+      "relevant_docs": ["doc_000423", "doc_000091"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q035",
+      "query": "ねじ締め機の軸ずれ",
+      "relevant_docs": ["doc_000434", "doc_000278"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q036",
+      "query": "レーザーマーカーの印字不良",
+      "relevant_docs": ["doc_000445", "doc_000312"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q037",
+      "query": "チラーの冷却能力不足",
+      "relevant_docs": ["doc_000456", "doc_000178"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q038",
+      "query": "バーコードリーダーの読み取りエラー",
+      "relevant_docs": ["doc_000467", "doc_000189"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q039",
+      "query": "ローラーコンベアの異音",
+      "relevant_docs": ["doc_000478", "doc_000042"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q040",
+      "query": "電磁弁のリーク",
+      "relevant_docs": ["doc_000489", "doc_000123"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q041",
+      "query": "ACサーボモーターのオーバーラン",
+      "relevant_docs": ["doc_000023", "doc_000098"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q042",
+      "query": "ボールネジのバックラッシュ増大",
+      "relevant_docs": ["doc_000034", "doc_000234"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q043",
+      "query": "リニアガイドの摩耗",
+      "relevant_docs": ["doc_000056", "doc_000301"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q044",
+      "query": "電源ユニットの出力電圧低下",
+      "relevant_docs": ["doc_000067", "doc_000401"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q045",
+      "query": "タイミングベルトの伸び",
+      "relevant_docs": ["doc_000089", "doc_000256"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q046",
+      "query": "フローセンサーの異常値",
+      "relevant_docs": ["doc_000112", "doc_000456"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q047",
+      "query": "スライダーの摺動抵抗増大",
+      "relevant_docs": ["doc_000134", "doc_000345"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q048",
+      "query": "カップリングの偏心",
+      "relevant_docs": ["doc_000145", "doc_000423"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q049",
+      "query": "減速機からの油漏れ",
+      "relevant_docs": ["doc_000167", "doc_000078"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q050",
+      "query": "搬送パレットの位置ずれ",
+      "relevant_docs": ["doc_000178", "doc_000201"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q051",
+      "query": "スピンドルモーターの異音",
+      "relevant_docs": ["doc_000189", "doc_000167"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q052",
+      "query": "アンプのオーバーヒート",
+      "relevant_docs": ["doc_000201", "doc_000267"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q053",
+      "query": "圧力スイッチの誤動作",
+      "relevant_docs": ["doc_000212", "doc_000223"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q054",
+      "query": "ハンドリングロボットの位置精度悪化",
+      "relevant_docs": ["doc_000223", "doc_000134"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q055",
+      "query": "切削液のポンプ故障",
+      "relevant_docs": ["doc_000234", "doc_000178"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q056",
+      "query": "ドリルの折損",
+      "relevant_docs": ["doc_000245", "doc_000234"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q057",
+      "query": "リレーの接点不良",
+      "relevant_docs": ["doc_000256", "doc_000401"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q058",
+      "query": "ワークストッパーの位置ずれ",
+      "relevant_docs": ["doc_000267", "doc_000356"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q059",
+      "query": "潤滑油の供給不足",
+      "relevant_docs": ["doc_000278", "doc_000167"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q060",
+      "query": "エアブローの圧力不足",
+      "relevant_docs": ["doc_000289", "doc_000489"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q061",
+      "query": "タイマーリレーの時間ずれ",
+      "relevant_docs": ["doc_000301", "doc_000256"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q062",
+      "query": "チャックの把持力不足",
+      "relevant_docs": ["doc_000312", "doc_000045"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q063",
+      "query": "安全扉のインターロック異常",
+      "relevant_docs": ["doc_000323", "doc_000145"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q064",
+      "query": "シーケンサのバッテリー警告",
+      "relevant_docs": ["doc_000334", "doc_000112"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q065",
+      "query": "クーラントタンクの液面低下",
+      "relevant_docs": ["doc_000345", "doc_000234"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q066",
+      "query": "スライドシャフトの焼き付き",
+      "relevant_docs": ["doc_000356", "doc_000278"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q067",
+      "query": "位置決めセンサーの検出遅れ",
+      "relevant_docs": ["doc_000367", "doc_000189"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q068",
+      "query": "ファンモーターの回転数低下",
+      "relevant_docs": ["doc_000378", "doc_000267"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q069",
+      "query": "グリッパーの開閉不良",
+      "relevant_docs": ["doc_000389", "doc_000134"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q070",
+      "query": "レーザー距離センサーのノイズ",
+      "relevant_docs": ["doc_000401", "doc_000312"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q071",
+      "query": "ダイレクトドライブモーターの振動",
+      "relevant_docs": ["doc_000412", "doc_000091"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q072",
+      "query": "NC装置の原点復帰エラー",
+      "relevant_docs": ["doc_000423", "doc_000167"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q073",
+      "query": "ヒューズ断線",
+      "relevant_docs": ["doc_000434", "doc_000401"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q074",
+      "query": "バキュームパッドの吸着力低下",
+      "relevant_docs": ["doc_000445", "doc_000412"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q075",
+      "query": "切削工具の異常摩耗",
+      "relevant_docs": ["doc_000456", "doc_000245"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q076",
+      "query": "サーミスタの断線",
+      "relevant_docs": ["doc_000467", "doc_000067"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q077",
+      "query": "シールドケーブルのノイズ対策不良",
+      "relevant_docs": ["doc_000478", "doc_000289"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q078",
+      "query": "ドライエア供給圧力異常",
+      "relevant_docs": ["doc_000489", "doc_000223"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q079",
+      "query": "主軸ベアリングの異音",
+      "relevant_docs": ["doc_000012", "doc_000189"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q080",
+      "query": "電磁クラッチの滑り",
+      "relevant_docs": ["doc_000023", "doc_000345"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q081",
+      "query": "フィルター目詰まりによる圧力上昇",
+      "relevant_docs": ["doc_000034", "doc_000378"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q082",
+      "query": "クランプ機構の固着",
+      "relevant_docs": ["doc_000045", "doc_000312"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q083",
+      "query": "ポテンショメータの接触不良",
+      "relevant_docs": ["doc_000056", "doc_000201"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q084",
+      "query": "空圧シリンダーのピストンパッキン劣化",
+      "relevant_docs": ["doc_000067", "doc_000489"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q085",
+      "query": "モーター配線の緩み",
+      "relevant_docs": ["doc_000078", "doc_000098"],
+      "category": "駆動制御"
+    },
+    {
+      "id": "Q086",
+      "query": "テーブル送りの振動",
+      "relevant_docs": ["doc_000089", "doc_000423"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q087",
+      "query": "デジタル入出力モジュールの故障",
+      "relevant_docs": ["doc_000112", "doc_000334"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q088",
+      "query": "搬送ローラーのベアリング劣化",
+      "relevant_docs": ["doc_000123", "doc_000478"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q089",
+      "query": "冷却ファンの回転異常",
+      "relevant_docs": ["doc_000134", "doc_000378"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q090",
+      "query": "バッテリーバックアップの電圧低下",
+      "relevant_docs": ["doc_000145", "doc_000334"],
+      "category": "通信機器"
+    },
+    {
+      "id": "Q091",
+      "query": "油圧ユニットのオイル温度上昇",
+      "relevant_docs": ["doc_000167", "doc_000045"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q092",
+      "query": "切粉排出装置の詰まり",
+      "relevant_docs": ["doc_000178", "doc_000301"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q093",
+      "query": "非常停止回路の誤作動",
+      "relevant_docs": ["doc_000189", "doc_000323"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q094",
+      "query": "搬送ベルトの張力不足",
+      "relevant_docs": ["doc_000201", "doc_000256"],
+      "category": "搬送設備"
+    },
+    {
+      "id": "Q095",
+      "query": "パワーサプライのノイズ",
+      "relevant_docs": ["doc_000212", "doc_000067"],
+      "category": "制御盤"
+    },
+    {
+      "id": "Q096",
+      "query": "位置決めピンの摩耗",
+      "relevant_docs": ["doc_000223", "doc_000367"],
+      "category": "組立設備"
+    },
+    {
+      "id": "Q097",
+      "query": "シリンダーロッドの曲がり",
+      "relevant_docs": ["doc_000234", "doc_000123"],
+      "category": "ユーティリティ"
+    },
+    {
+      "id": "Q098",
+      "query": "回転計の指示値異常",
+      "relevant_docs": ["doc_000245", "doc_000423"],
+      "category": "センサー"
+    },
+    {
+      "id": "Q099",
+      "query": "軸受の温度上昇",
+      "relevant_docs": ["doc_000256", "doc_000012"],
+      "category": "加工設備"
+    },
+    {
+      "id": "Q100",
+      "query": "制御プログラムのループエラー",
+      "relevant_docs": ["doc_000267", "doc_000112"],
+      "category": "通信機器"
+    }
+  ]
+}

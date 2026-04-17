@@ -1,0 +1,106 @@
+services:
+  # PostgreSQL + pgvector（ベクトル永続化）
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: assistchat-postgres
+    environment:
+      POSTGRES_DB: assistchat
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      # パフォーマンスチューニング
+      POSTGRES_SHARED_BUFFERS: 256MB
+      POSTGRES_EFFECTIVE_CACHE_SIZE: 1GB
+      POSTGRES_MAINTENANCE_WORK_MEM: 128MB
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d assistchat"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - assistchat-network
+
+  rag-api:
+    build:
+      context: .
+      dockerfile: services/rag-api/Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./data:/app/data
+      - ./tools:/app/tools
+      - ./packages:/packages
+      - ./services/rag-api/src:/app/src
+    env_file:
+      - .env
+    environment:
+      # PostgreSQL 接続情報
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=assistchat
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      # OPENAI_API_KEYは.envファイルから自動読み込み
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+    networks:
+      - assistchat-network
+
+  assist-chat:
+    build:
+      context: ./apps/assist-chat
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8001
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/assist-chat:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8001
+      - WATCHPACK_POLLING=true
+    command: npm run dev
+    depends_on:
+      - rag-api
+    restart: always
+    networks:
+      - assistchat-network
+
+  # MLflow Tracking Server (profile: mlops)
+  # 使い方: docker compose --profile mlops up -d mlflow
+  # UI: http://localhost:5001
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.16.2
+    container_name: assistchat-mlflow
+    profiles:
+      - mlops
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./mlruns:/mlruns
+      - ./mlartifacts:/mlartifacts
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri file:///mlruns
+      --default-artifact-root file:///mlartifacts
+    restart: unless-stopped
+    networks:
+      - assistchat-network
+
+networks:
+  assistchat-network:
+    driver: bridge
+
+volumes:
+  pgdata:

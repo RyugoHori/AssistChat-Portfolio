@@ -1,0 +1,267 @@
+# GitHub Actions CI
+#
+# push / pull_request 時に以下を並列実行する。
+#
+# 設計メモ:
+#   - 失敗を早く検知するためジョブは細かく分割
+#   - concurrency で同じブランチの古い実行は自動キャンセル
+#   - timeout-minutes を必ず設定（ハング対策）
+#   - 重い LLM 呼び出しを含む評価は simulate モードのみ（API キー不要）
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # =========================================================
+  # Backend: Ruff
+  # =========================================================
+  backend-lint:
+    name: Backend Lint (Ruff)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Ruff
+        run: pip install ruff==0.6.9
+
+      - name: Ruff check
+        run: ruff check packages/rag-core services/rag-api/src tools --output-format=github
+
+  # =========================================================
+  # Backend: MyPy
+  # =========================================================
+  backend-typecheck:
+    name: Backend Type Check (MyPy)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mypy==1.11.2
+          pip install -e ./packages/rag-core
+          pip install -r services/rag-api/requirements.txt
+
+      - name: MyPy
+        run: mypy packages/rag-core/rag_core services/rag-api/src --ignore-missing-imports
+
+  # =========================================================
+  # Backend: Pytest
+  # =========================================================
+  backend-test:
+    name: Backend Tests (Pytest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-asyncio pytest-cov coverage
+          pip install -e ./packages/rag-core
+          pip install -r services/rag-api/requirements.txt
+
+      - name: Run tests with coverage
+        env:
+          PYTHONPATH: ${{ github.workspace }}/packages/rag-core:${{ github.workspace }}/services/rag-api/src:${{ github.workspace }}/tools/data_cleansing
+        run: |
+          pytest --cov --cov-report=term-missing
+
+  # =========================================================
+  # Backend: 評価スクリプト (simulate のみ。LLM 呼び出し無し)
+  # =========================================================
+  backend-eval:
+    name: Backend Evaluation (simulate)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy requests
+
+      - name: Run evaluation (simulate mode)
+        run: |
+          cd tools/evaluation
+          python evaluate.py --simulate
+
+  # =========================================================
+  # Frontend: ESLint
+  # =========================================================
+  frontend-lint:
+    name: Frontend Lint (ESLint)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: ./apps/assist-chat
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: ./apps/assist-chat/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+  # =========================================================
+  # Frontend: Type check
+  # =========================================================
+  frontend-typecheck:
+    name: Frontend Type Check (tsc)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: ./apps/assist-chat
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: ./apps/assist-chat/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+  # =========================================================
+  # Frontend: Vitest
+  # =========================================================
+  frontend-test:
+    name: Frontend Tests (Vitest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ./apps/assist-chat
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: ./apps/assist-chat/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test
+
+  # =========================================================
+  # Frontend: Build
+  # =========================================================
+  frontend-build:
+    name: Frontend Build (Next.js)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ./apps/assist-chat
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: ./apps/assist-chat/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:8001
+
+  # =========================================================
+  # Docker build 検証（起動はしない）
+  # =========================================================
+  docker-build:
+    name: Docker Build Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build rag-api image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: services/rag-api/Dockerfile
+          push: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build assist-chat image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./apps/assist-chat
+          file: ./apps/assist-chat/Dockerfile
+          push: false
+          build-args: |
+            NEXT_PUBLIC_API_URL=http://localhost:8001
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
