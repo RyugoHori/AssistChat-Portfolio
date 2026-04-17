@@ -1,0 +1,167 @@
+# 設備名の正準化辞書
+#
+# 本番では設備台帳と整合するマスタデータとして管理する。
+# 未知の別名が検出されたら「未登録語リスト」に追加し、レビューの上で登録する運用。
+#
+# スキーマ:
+#   - canonical: 正準名（検索コーパスに格納する形）
+#     aliases:   現場で使われる別名・略称・誤字・英語表記
+
+equipment:
+  - canonical: 圧力トランスミッタ
+    aliases:
+      - 圧トラ
+      - 圧力TR
+      - 圧力トランスデューサ
+      - PT
+      - 圧セン
+      - プレッシャートランスミッタ
+
+  - canonical: NC旋盤
+    aliases:
+      - NC-LATHE
+      - ｎｃ旋盤
+      - ＮＣ旋盤
+      - NCレース
+      - nc lathe
+
+  - canonical: マシニングセンタ
+    aliases:
+      - MC
+      - マシニング
+      - マシニングセンター
+      - マシンセンタ
+      - machining center
+
+  - canonical: ベルトコンベア
+    aliases:
+      - ベルコン
+      - ベルトコンベヤ
+      - BC
+      - belt conveyor
+      - コンベア
+
+  - canonical: ローラーコンベア
+    aliases:
+      - ローラコン
+      - ローラーコンベヤ
+      - RC
+      - roller conveyor
+
+  - canonical: 光電センサー
+    aliases:
+      - 光電
+      - フォトセン
+      - PSEN
+      - photo sensor
+      - 光電スイッチ
+
+  - canonical: 近接スイッチ
+    aliases:
+      - 近接SW
+      - PRX
+      - プロキシミティ
+      - proximity switch
+      - 近接
+
+  - canonical: タッチパネル(HMI)
+    aliases:
+      - HMI
+      - タッチパネル
+      - 表示器
+      - touch panel
+      - オペレーションパネル
+
+  - canonical: PLC CPUユニット
+    aliases:
+      - PLC
+      - CPU
+      - PLCユニット
+      - programmable logic controller
+      - シーケンサ
+
+  - canonical: サーボアンプ
+    aliases:
+      - サーボドライバ
+      - SVA
+      - servo amp
+      - サボアン
+
+  - canonical: インバータ
+    aliases:
+      - INV
+      - VFD
+      - インバーター
+      - 可変速ドライブ
+
+  - canonical: 貫流ボイラー
+    aliases:
+      - 貫流ボイラ
+      - ボイラー
+      - ボイラ
+      - once-through boiler
+      - 蒸気発生器
+
+  - canonical: 油圧プレス機
+    aliases:
+      - プレス
+      - 油圧プレス
+      - hydraulic press
+      - プレス機
+
+  - canonical: 冷却塔(クーリングタワー)
+    aliases:
+      - クーリングタワー
+      - CT
+      - cooling tower
+      - 冷却塔
+
+  - canonical: 無人搬送車(AGV)
+    aliases:
+      - AGV
+      - 無人搬送車
+      - automated guided vehicle
+      - 自動搬送車
+
+# OCR 文字混同辞書（文脈条件付きで補正）
+# "context" は補正を適用する条件を表す正規表現
+ocr_corrections:
+  - pattern: "0"       # 数字のゼロ
+    replace: "O"       # アルファベットのオー
+    context: "周辺が英字"
+
+  - pattern: "l"       # エル小文字
+    replace: "1"       # 数字の 1
+    context: "周辺が数字"
+
+  - pattern: "一"      # 漢数字の一
+    replace: "ー"      # カタカナの長音
+    context: "カタカナ語の直後"
+
+  - pattern: "力"
+    replace: "カ"
+    context: "カタカナ語の一部"
+
+  - pattern: "ロ"      # カタカナのロ
+    replace: "口"      # 漢字の口
+    context: "漢字列の中"
+
+  - pattern: "工"      # 漢字の工
+    replace: "エ"      # カタカナのエ
+    context: "カタカナ語の一部"
+
+  - pattern: "才"      # 漢字の才
+    replace: "オ"      # カタカナのオ
+    context: "カタカナ語の一部"
+
+  - pattern: "二"      # 漢数字の二
+    replace: "ニ"      # カタカナのニ
+    context: "カタカナ語の一部"
+
+  - pattern: "夕"      # 漢字の夕
+    replace: "タ"      # カタカナのタ
+    context: "カタカナ語の一部"
+
+  - pattern: "卜"      # 漢字の卜
+    replace: "ト"      # カタカナのト
+    context: "カタカナ語の一部"

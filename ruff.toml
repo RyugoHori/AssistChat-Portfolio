@@ -1,0 +1,24 @@
+# Ruff 設定
+# https://docs.astral.sh/ruff/configuration/
+
+line-length = 120
+target-version = "py311"
+
+exclude = [
+    ".venv",
+    "node_modules",
+    "__pycache__",
+    ".git",
+    "data",
+    "mlruns",
+]
+
+# ruff のデフォルトルール (E4/E7/E9 + F) を明示的に維持
+# さらに E402 (import not at top) を追加で有効化
+[lint]
+extend-select = ["E402"]
+
+[lint.per-file-ignores]
+# index-builder スクリプトは sys.path.append 後に rag_core を import する
+# 構造上 E402 は意図的なので無視する
+"tools/index-builder/*.py" = ["E402"]

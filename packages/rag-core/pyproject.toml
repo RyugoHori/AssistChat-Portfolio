@@ -1,0 +1,43 @@
+[project]
+name = "rag-core"
+version = "3.0.0"
+description = "Core RAG library for AssistChat: hybrid retrieval and conversational LLM generation"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    # PostgreSQL + pgvector（ベクトル検索）
+    "psycopg2-binary>=2.9.9",
+    "pgvector>=0.2.4",
+    "sentence-transformers>=2.2.2",
+    "rank-bm25>=0.2.2",
+    "mecab-python3>=1.0.8",
+    "unidic-lite>=1.0.8",
+    "tqdm>=4.66.0",
+    "torch>=2.0.0",
+    # LLM 統合（対話モード）
+    "openai>=1.12.0",
+    # データクレンジング辞書
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.4.0",
+    "mypy>=1.8.0",
+]
+mlops = [
+    "mlflow>=2.10.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rag_core*"]
+

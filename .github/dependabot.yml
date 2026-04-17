@@ -1,0 +1,109 @@
+# Dependabot 設定
+#
+# 目的: 依存ライブラリと GitHub Actions の脆弱性パッチを自動でプルリクエスト化する
+#
+# 運用方針:
+#   - 毎週月曜に確認（通知量をコントロール）
+#   - 同時にオープンする PR 数を制限して開発を阻害しない
+#   - patch / minor はグループ化、major は個別 PR で慎重レビュー
+
+version: 2
+updates:
+  # -------- Python (rag-api) --------
+  - package-ecosystem: "pip"
+    directory: "/services/rag-api"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      python-minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+
+  # -------- Python (rag-core) --------
+  - package-ecosystem: "pip"
+    directory: "/packages/rag-core"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "chore(deps)"
+
+  # -------- Frontend (Next.js) --------
+  - package-ecosystem: "npm"
+    directory: "/apps/assist-chat"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "javascript"
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      frontend-minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # Next.js の major 更新は手動で判断
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  # -------- GitHub Actions --------
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(ci)"
+
+  # -------- Docker --------
+  - package-ecosystem: "docker"
+    directory: "/services/rag-api"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 2
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(docker)"
+
+  - package-ecosystem: "docker"
+    directory: "/apps/assist-chat"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 2
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(docker)"
