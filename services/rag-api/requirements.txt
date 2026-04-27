@@ -7,7 +7,7 @@ aiofiles
 python-dotenv
 
 # PostgreSQL + pgvector（ベクトル検索）
-psycopg2-binary>=2.9.9
+psycopg2-binary>=2.9.12
 pgvector>=0.2.4
 
 # LLM 統合（対話モード・ストリーミング対応）
