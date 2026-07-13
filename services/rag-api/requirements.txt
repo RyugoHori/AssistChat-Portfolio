@@ -8,7 +8,7 @@ python-dotenv
 
 # PostgreSQL + pgvector（ベクトル検索）
 psycopg2-binary>=2.9.9
-pgvector>=0.2.4
+pgvector>=0.5.0
 
 # LLM 統合（対話モード・ストリーミング対応）
 openai>=1.12.0
