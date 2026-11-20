@@ -1,0 +1,82 @@
+# ===================
+# Node.js / Next.js
+# ===================
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# ===================
+# Python
+# ===================
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ===================
+# IDE
+# ===================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ===================
+# OS
+# ===================
+.DS_Store
+Thumbs.db
+
+# ===================
+# 環境変数
+# ===================
+.env
+.env.local
+.env.*.local
+
+# ===================
+# ログ
+# ===================
+*.log
+npm-debug.log*
+
+# ===================
+# テスト・カバレッジ
+# ===================
+coverage/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+apps/assist-chat/coverage/
+
+# ===================
+# フィードバック永続化（実データは共有しない）
+# ===================
+data/feedback/*.jsonl
+data/usage/
+
+# ===================
+# 生成物・作業ファイル（データから作り直せるもの、判定作業の途中のもの）
+# ===================
+data/indices/
+data/processed/
+tools/evaluation/judge_sheet.csv
+tools/evaluation/candidates.csv
+
+# ===================
+# ML Models (sentence-transformers cache)
+# ===================
+models/
+
+# ===================
+# その他
+# ===================
+*.bak
+*.tmp
+.cursor/
