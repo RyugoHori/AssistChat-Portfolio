@@ -1,0 +1,41 @@
+﻿query_id,query,type,version
+A001,ALM1102 出て途中で止まった,error_code,v1
+A002,孔あけ機 ALM1205,error_code,v1
+A003,ローラーコンベア ALM2103で止まった,error_code,v1
+A004,ALM2205,error_code,v1
+A005,加熱炉 ALM3102,error_code,v1
+A006,ALM3301 風が弱い,error_code,v1
+A007,コンプレッサー ALM4101,error_code,v1
+A008,インバータ ALM5102,error_code,v1
+A009,ALM5202,error_code,v1
+A010,ALM6301 PLCとつながらなくなる,error_code,v1
+A011,面取り機 焼け カケ,term,v1
+A012,切断機 切り口のカケ,term,v1
+A013,折割機 斜め割れ,term,v1
+A014,スクリーン印刷機 端のかすれ,term,v1
+A015,風冷 破砕試験 破片少ない,term,v1
+A016,ローラーコンベア ガラス滑る,term,v1
+A017,電磁開閉器 溶着 モーター止まらない,term,v1
+A018,熱電対 温度が低く出る,term,v1
+A019,検査カメラ ピンボケ 見逃し,term,v1
+A020,放射温度計 実温より高い,term,v1
+A021,ローラーコンベア カタンカタン鳴ってたまに止まる,paraphrase,v1
+A022,ベルトコンベアのベルトが端っこに寄ってく,paraphrase,v1
+A023,ロボットがガラス置くとこズレてる,paraphrase,v1
+A024,冷却水ポンプ 軸のとこから水ポタポタ,paraphrase,v1
+A025,真空ポンプの音でかくなって排気から白いの出てる,paraphrase,v1
+A026,集塵機 いつものプシュッて音がしない,paraphrase,v1
+A027,安全扉ちゃんと閉めてるのに起動かからない,paraphrase,v1
+A028,I/Oのランプ 何もしてないのにチカチカ点く,paraphrase,v1
+A029,制御盤のなかから焦げた臭いがする,paraphrase,v1
+A030,洗浄機から出てきたガラスに白い跡が残る,paraphrase,v1
+A031,ＡＬＭ１１０２ 出て途中で止まった,notation,v1
+A032,加熱炉 ＡＬＭ３１０２,notation,v1
+A033,ＡＬＭ６３０１ ＰＬＣとつながらなくなる,notation,v1
+A034,ＡＬＭ５２０２,notation,v1
+A035,INV ALM5102,notation,v1
+A036,ベルトCVのベルトが端っこに寄ってく,notation,v1
+A037,ローラーCV カタンカタン鳴ってたまに止まる,notation,v1
+A038,コンプレッサ ALM4101,notation,v1
+A039,電磁開閉器 溶着 モータ止まらない,notation,v1
+A040,ローラコンベア ガラス滑る,notation,v1
